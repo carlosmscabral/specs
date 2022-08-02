@@ -1,0 +1,60 @@
+openapi: 3.0.1
+info:
+  title: Shop
+  description: 'Shop items'
+  version: 1.0.0
+servers:
+- url: https://backend-cloud-zc65cqrkqa-ue.a.run.app/v1/shop
+tags:
+- name: shop
+  description: Shop anything you want!
+security:
+- api_key: []
+paths:
+  /products:
+    get:
+      tags:
+      - shop
+      summary: Get a list of products
+      operationId: getProducts
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ProductsResponse'
+                  
+      
+components:
+
+  schemas:
+    ProductsResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        server:
+          type: string
+          enum:
+            - legacy
+            - cloud
+            
+    Product:
+      type: object
+      properties:
+        price:
+          description: Item price
+          type: integer
+          format: int64
+        name:
+          type: string
+          description: Item name
+
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: x-apikey
+      in: header

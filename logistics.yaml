@@ -1,0 +1,45 @@
+openapi: '3.0.2'
+info:
+  title: Logistics
+  version: '1.0'
+servers:
+  - url: https://x.apigee.carloscabral.com.br/v1/logistics
+paths:
+  /products:
+    get:
+      description: "Retorna lista de produtos"
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+
+components:
+  schemas:
+
+    Response: 
+      type: object
+      description: "Response produtos"
+      properties:
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              price:
+                type: integer
+
+        server: 
+          type: string
+        
+        

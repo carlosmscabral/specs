@@ -1,0 +1,97 @@
+openapi: '3.0.2'
+info:
+  title: Diagnósticos Mint
+  version: '1.0'
+servers:
+  - url: https://x.apigee.carloscabral.com.br/v1/diagnosticomint
+paths:
+  /resultado:
+    post:
+      description: "Resultados de diagnóstico para um dado CPF"
+      # parameters:
+      #   - in: header
+      #     name: Authorization
+      #     schema:
+      #       type: string
+      #     required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+      security:
+        - bearerAuth: []
+  # /token:
+  #   post:
+  #     description: 'Request de um JWT token'
+  #     servers:
+  #       - url: https://x.apigee.carloscabral.com.br/v1/oauth2
+  #     security:
+  #       - basicAuth: []
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/x-www-form-urlencoded:
+  #           schema:
+  #             $ref: '#/components/schemas/RequestToken'  
+  #     responses:
+  #       '200':
+  #         description: OK
+
+components:
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    
+    # basicAuth:            # arbitrary name for the security scheme
+    #   type: http
+    #   scheme: basic
+
+  schemas:
+    Request: 
+      type: object
+      description: "Request de diagnóstico. Espera CPF e Lab"
+      properties:
+        cpf:
+          type: string
+        lab:
+          type: string
+          enum:
+            - delboni
+            - lavosier
+    Response: 
+      type: object
+      description: "Response de diagnóstico"
+      properties:
+        Nome:
+          type: string
+        DataNascimento:
+          type: string
+        Sexo:
+          type: string
+        DataExame:
+          type: string
+        Resultado:
+          type: string
+
+    # RequestToken: 
+    #   type: object
+    #   description: "Parâmetros para request de Token"
+    #   properties:
+    #     grant_type:
+    #       type: string
+    #     username:
+    #       type: string
+    #     password:
+    #       type: string
+        
