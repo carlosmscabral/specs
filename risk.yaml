@@ -1,13 +1,14 @@
-openapi: '3.0.2'
+openapi: 3.0.2
 info:
-  title: Risks
+  title: Risks API
   version: '1.0'
+  description: 'Given a set of user information, returns the risk score associated with it'
 servers:
-  - url: https://x.apigee.carloscabral.com.br/v1/risks
+  - url: 'https://x.apigee.carloscabral.com.br/v1/risks'
 paths:
   /score:
     get:
-      description: "Given a username and CPF, returns the risk in percentage"
+      description: 'Given a username and CPF, returns the risk in percentage'
       parameters:
         - in: header
           name: x-apikey
@@ -27,12 +28,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
-
 components:
   schemas:
     Request:
       type: object
-      description: "Risk Request. Requires a name and a CPF."
+      description: Risk Request. Requires a name and a CPF.
       properties:
         input:
           type: object
@@ -40,10 +40,10 @@ components:
             name:
               type: string
             cpf:
-             type: string
-    Response: 
+              type: string
+    Response:
       type: object
-      description: "Risk response. Replays input and adds risk."
+      description: Risk response. Replays input and adds risk.
       properties:
         input:
           type: object
@@ -51,8 +51,9 @@ components:
             name:
               type: string
             cpf:
-             type: string
+              type: string
         risk:
           type: integer
         source:
           type: string
+x-internal: false
