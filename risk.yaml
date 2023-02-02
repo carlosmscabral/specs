@@ -3,6 +3,13 @@ info:
   title: Risks API
   version: '1.0'
   description: 'Given a set of user information, returns the risk score associated with it'
+  contact:
+    name: carloscabral
+    email: carloscabral@google.com
+    url: 'https://cloud.google.com/apigee/docs'
+  license:
+    name: MIT
+    url: 'https://cloud.google.com/apigee/docs'
 servers:
   - url: 'https://x.apigee.carloscabral.com.br/v1/risks'
 paths:
@@ -15,6 +22,7 @@ paths:
           schema:
             type: string
           required: true
+          description: API Key
       requestBody:
         required: true
         content:
@@ -28,6 +36,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
+      operationId: getScore
 components:
   schemas:
     Request:
